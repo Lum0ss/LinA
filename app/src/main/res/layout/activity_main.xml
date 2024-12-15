@@ -8,22 +8,68 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/matrixTestView"
+        android:id="@+id/matrixAName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTest" />
-
-    <TextView
-        android:id="@+id/textViewTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="おはようございます。"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Matrix A ="
+        app:layout_constraintBottom_toTopOf="@+id/matrixAInput"
+        app:layout_constraintEnd_toStartOf="@+id/matrixBName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/matrixBName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Matrix B ="
+        app:layout_constraintBottom_toTopOf="@+id/matrixBInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/matrixAName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/matrixAInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="1.0 0.0\n0.0 1.0"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        app:layout_constraintBottom_toTopOf="@+id/multiplyButton"
+        app:layout_constraintEnd_toStartOf="@+id/matrixBInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matrixAName" />
+
+    <EditText
+        android:id="@+id/matrixBInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="1.0 -1.0\n-1.0 1.0"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        app:layout_constraintBottom_toTopOf="@+id/multiplyButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/matrixAInput"
+        app:layout_constraintTop_toBottomOf="@+id/matrixBName" />
+
+    <Button
+        android:id="@+id/multiplyButton"
+        android:layout_width="293dp"
+        android:layout_height="58dp"
+        android:text="Multiply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="64dp" />
+
+    <TextView
+        android:id="@+id/resultView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="result"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multiplyButton"
+        tools:layout_editor_absoluteX="173dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
