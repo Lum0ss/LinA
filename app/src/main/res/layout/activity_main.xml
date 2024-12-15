@@ -11,6 +11,8 @@
         android:id="@+id/matrixAName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Matrix A ="
         app:layout_constraintBottom_toTopOf="@+id/matrixAInput"
         app:layout_constraintEnd_toStartOf="@+id/matrixBName"
@@ -21,6 +23,8 @@
         android:id="@+id/matrixBName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Matrix B ="
         app:layout_constraintBottom_toTopOf="@+id/matrixBInput"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,10 +35,12 @@
         android:id="@+id/matrixAInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="1.0 0.0\n0.0 1.0"
-        android:inputType="textMultiLine"
+        android:inputType="text|textMultiLine"
         android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/multiplyButton"
         app:layout_constraintEnd_toStartOf="@+id/matrixBInput"
@@ -45,6 +51,8 @@
         android:id="@+id/matrixBInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="1.0 -1.0\n-1.0 1.0"
@@ -59,10 +67,12 @@
         android:id="@+id/multiplyButton"
         android:layout_width="293dp"
         android:layout_height="58dp"
+        android:layout_marginBottom="16dp"
         android:text="Multiply"
+        app:layout_constraintBottom_toTopOf="@+id/resultView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="64dp" />
+        app:layout_constraintTop_toBottomOf="@+id/matrixAInput" />
 
     <TextView
         android:id="@+id/resultView"
@@ -70,6 +80,7 @@
         android:layout_height="wrap_content"
         android:text="result"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/multiplyButton"
-        tools:layout_editor_absoluteX="173dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multiplyButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,11 @@
 package com.atom.lina;
 
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -23,17 +28,65 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        matrixTest();
+
+        // set filter for matrix input
+        InputFilter[] matrixInputFilter = new InputFilter[]{
+                new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence charSequence, int start, int end, Spanned spanned, int i2, int i3) {
+                        for(int i = 0; i < end; i++){
+                            char c = charSequence.charAt(i);
+                            if(!Character.isDigit(c) && c != '.' && c != '-' && c != ' ' && c != '\n'){
+                                return ""; // return empty char
+                            }
+                        }
+                        return null;
+                    }
+                }
+        };
+        // set the input filter for both edittext fields
+        EditText matrixAEditText = (EditText) findViewById(R.id.matrixAInput);
+        EditText matrixBEditText = (EditText) findViewById(R.id.matrixBInput);
+        matrixAEditText.setFilters(matrixInputFilter);
+        matrixBEditText.setFilters(matrixInputFilter);
+
+        // create multiply button
+        Button multiplyButton = (Button) findViewById(R.id.multiplyButton);
+        multiplyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickMultiply();
+            }
+        });
     }
 
-    private void matrixTest(){
-        SimpleMatrix matrixA = new SimpleMatrix(new double[][]{
-                {1.0f, 1.0f},
-                {2.0f, 2.0f}
-        });
-        TextView matrixTestView = findViewById(R.id.matrixTestView);
-        matrixTestView.setText("Matrix: " + matrixA);
+    // read the matrices and multiply them when the multiply button is clicked
+    private void onClickMultiply(){
+        EditText matrixAEditText = (EditText) findViewById(R.id.matrixAInput);
+        EditText matrixBEditText = (EditText) findViewById(R.id.matrixBInput);
+        String matrixAString = matrixAEditText.getText().toString();
+        String matrixBString = matrixBEditText.getText().toString();
+        SimpleMatrix matrixA = readMatrix(matrixAString);
+        SimpleMatrix matrixB = readMatrix(matrixBString);
+        // check if the matrices can be multiplied
+        if(matrixA.getNumCols() != matrixB.getNumRows()){
+            System.out.println("Incompatible dimensions.");
+            return;
+        }
+        SimpleMatrix productMatrix = matrixA.mult(matrixB);
+        String productMatrixString = productMatrix.toString();
+        TextView resultView = findViewById(R.id.resultView);
+        resultView.setText(productMatrixString);
     }
+
+//    private void matrixTest(){
+//        SimpleMatrix matrixA = new SimpleMatrix(new double[][]{
+//                {1.0f, 1.0f},
+//                {2.0f, 2.0f}
+//        });
+//        TextView matrixTestView = findViewById(R.id.matrixTestView);
+//        matrixTestView.setText("Matrix: " + matrixA);
+//    }
 
     private SimpleMatrix readMatrix(String input){
         // split string into rows
